@@ -1,3 +1,5 @@
+import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
@@ -5,22 +7,18 @@ import java.io.IOException;
 
 public class Initialisation {
     public Terminal term;
+    public TextGraphics textGraphics; //layout pour afficher des choses plus facilement sur le terminal
+    public TerminalSize terminalSize = new TerminalSize(1440, 900); //permet de définir facilement la taille du terminal
 
     public Initialisation() {
         this.term = null;
         DefaultTerminalFactory default_term = new DefaultTerminalFactory();
         try {
-            term = default_term.createTerminal();
+            term = default_term.createTerminal(); // À faire : créer un terminal personnalisé
+            term.setCursorVisible(false); //enlève le curseur
+            textGraphics = term.newTextGraphics();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (term != null) {
-                try {
-                    term.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 }

@@ -5,27 +5,29 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         Initialisation init = new Initialisation();
+        Menu menu = new Menu();
         try{
-            init.term.putString("Hello World !");
-            init.term.flush(); // update terminal print
+            menu.term.putString("Hello World !");
+            menu.term.flush(); // update terminal print
 
-            TerminalPosition startPosition = init.term.getCursorPosition();
-            init.term.setCursorPosition(startPosition.withRelativeColumn(3).withRelativeRow(2));
-            init.term.flush();
+            TerminalPosition startPosition = menu.term.getCursorPosition();
+            menu.term.setCursorPosition(startPosition.withRelativeColumn(3).withRelativeRow(2));
+            menu.printMenu();
+            menu.term.flush();
 
-            /*
-            init.term.setBackgroundColor(TextColor.ANSI.BLUE);
-            init.term.setForegroundColor(TextColor.ANSI.YELLOW);*/
-            Thread.sleep(2000);
-            init.term.bell();
-            init.term.flush();
-            Thread.sleep(200);
+
+            //menu.term.setBackgroundColor(TextColor.ANSI.BLUE);
+            //menu.term.setForegroundColor(TextColor.ANSI.YELLOW);
         }
         catch (IOException e){
             e.printStackTrace();
         }
-        catch (InterruptedException e){
-            throw new RuntimeException(e);
+        finally {
+            try {
+                menu.term.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

@@ -8,13 +8,14 @@ import java.io.IOException;
 public class Initialisation {
     public Terminal term;
     public TextGraphics textGraphics; //layout pour afficher des choses plus facilement sur le terminal
-    public TerminalSize terminalSize = new TerminalSize(1440, 900); //permet de définir facilement la taille du terminal
+    public TerminalSize terminalSize = new TerminalSize(1440, 900); //permet de définir la taille du terminal
 
     public Initialisation() {
         this.term = null;
         DefaultTerminalFactory default_term = new DefaultTerminalFactory();
+        default_term.setInitialTerminalSize(terminalSize); //LA LIGNE QUI FAIT LE JAVA HEAP SPACE
         try {
-            term = default_term.createTerminal(); // À faire : créer un terminal personnalisé
+            term = default_term.createTerminal();
             term.setCursorVisible(false); //enlève le curseur
             textGraphics = term.newTextGraphics();
         } catch (IOException e) {

@@ -8,7 +8,7 @@ public class Main {
         Menu menu = new Menu();
         try{
             menu.term.putString("Hello World !");
-            menu.term.flush(); // update terminal print
+            //menu.term.flush(); // update terminal print
 
             TerminalPosition startPosition = menu.term.getCursorPosition();
             menu.term.setCursorPosition(startPosition.withRelativeColumn(3).withRelativeRow(2));
